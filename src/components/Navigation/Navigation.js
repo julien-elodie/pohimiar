@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
+
+import logo from '../App/image/logo.svg';
+
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
@@ -22,8 +25,13 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import classNames from 'classnames';
+import red from '@material-ui/core/colors/red';
+import Paper from '@material-ui/core/Paper';
+import CssBaseline from '@material-ui/core/CssBaseline';
+// import Pages from '../Pages/Pages';
+
+const drawerWidth = 256;
 
 const styles = theme => ({
   root: {
@@ -34,14 +42,22 @@ const styles = theme => ({
     flexGrow: 1,
   },
   menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
+    marginLeft: 0,
+    marginRight: -12,
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: -8,
+    },
+  },
+  logo: {
+    height: 48,
   },
   title: {
     display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    marginRight: theme.spacing.unit * 6,
+    minWidth: 97,
   },
   search: {
     position: 'relative',
@@ -55,11 +71,11 @@ const styles = theme => ({
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing.unit * 3,
-      width: '60%',
+      width: '50%',
     },
   },
   searchIcon: {
-    width: theme.spacing.unit * 9,
+    width: theme.spacing.unit * 5,
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -75,7 +91,7 @@ const styles = theme => ({
     paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
+    paddingLeft: theme.spacing.unit * 5,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -88,30 +104,25 @@ const styles = theme => ({
       display: 'flex',
     },
   },
+  buttonContainer: {
+    marginTop: 8,
+  },
   sectionMobile: {
     display: 'flex',
     [theme.breakpoints.up('md')]: {
       display: 'none',
     },
   },
-  buttonContainer: {
-    marginTop: 8,
-    marginBottom: 8,
-  },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
   },
   drawer: {
-    width: 'auto',
+    width: drawerWidth,
     flexShrink: 0,
     whiteSpace: 'nowrap',
   },
   drawerOpen: {
-    width: 'auto',
+    width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -123,9 +134,9 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing.unit * 7 + 1,
+    width: theme.spacing.unit * 10 - 5,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 7 + 1,
+      width: theme.spacing.unit * 10 - 5,
     },
   },
   toolbar: {
@@ -135,13 +146,129 @@ const styles = theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
+  newsList: {
+    marginTop: theme.spacing.unit,
+    [theme.breakpoints.up('sm')]: {
+      marginTop: 0,
+    },
+  },
+  newsListOpen: {
+    width: `calc(${drawerWidth}px - 124px)`,
+  },
+  newsListClose: {
+    width: 68,
+  },
+  newsItem: {
+    padding: 0,
+    height: 64,
+    borderTopRightRadius: 32,
+    borderBottomRightRadius: 32,
+  },
+  addNewPaper: {
+    margin: theme.spacing.unit,
+    borderRadius: 28,
+  },
+  addNewPaperOpen: {
+    width: 120,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  addNewPaperClose: {
+    width: 56,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  paperContainer: {
+    paddingTop: 24,
+    paddingLeft: 24,
+    width: 56,
+    height: 56,
+  },
+  paperContainerOpen: {
+    width: 120,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  paperContainerClose: {
+    width: 56,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  addNew: {
+    margin: -24,
+    width: 56,
+    height: 56,
+    color: red[500],
+    backgroundColor: '#fff',
+    float: 'left',
+  },
+  news: {
+    color: red[500],
+    marginTop: -40,
+    marginLeft: 54,
+    fontSize: 18,
+    position: 'absolute',
+    width: 48,
+  },
+  newsOpen: {
+    display: 'block',
+  },
+  newsClose: {
+    display: 'none',
+  },
+  list: {
+    
+  },
+  listOpen: {
+    width: `calc(${drawerWidth}px - 16px)`,
+  },
+  listClose:{
+    width: 55,
+  },
+  item: {
+    paddingRight: 0,
+    paddingLeft: theme.spacing.unit,
+    paddingTop: 2,
+    paddingBottom: 2,
+    borderTopRightRadius: 16,
+    borderBottomRightRadius: 16,
+  },
+  itemButton: {
+    width: 32,
+    height: 32,
+    marginLeft: 12,
+  },
+  itemIcon: {
+    margin: -12,
+    width: 32,
+    height: 32,
+    color: red[500],
+    backgroundColor: '#fff',
+  },
+  itemText: {
+    marginLeft: -20,
+  },
+  itemTextOpen: {
+    display: 'block'
+  },
+  itemTextClose: {
+    display: 'none',
+  },
   content: {
     flexGrow: 1,
-    padding: theme.spacing.unit * 3,
+    paddingTop: theme.spacing.unit * 8,
   },
 });
 
-class PrimarySearchAppBar extends React.Component {
+class Navigation extends React.Component {
   state = {
     anchorEl: null,
     mobileMoreAnchorEl: null,
@@ -228,6 +355,7 @@ class PrimarySearchAppBar extends React.Component {
 
     return (
       <div className={classes.root}>
+        <CssBaseline/>
         <AppBar position="fixed" className={classes.appBar}>
           <Toolbar>
             <IconButton
@@ -238,6 +366,7 @@ class PrimarySearchAppBar extends React.Component {
             >
               <MenuIcon />
             </IconButton>
+            <img src={logo} className={classes.logo} alt="logo" />
             <Typography className={classes.title} variant="h6" color="inherit" noWrap>
               POHIMIAR
             </Typography>
@@ -301,31 +430,87 @@ class PrimarySearchAppBar extends React.Component {
           open={this.state.open}
         >
           <div className={classes.toolbar} />
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+          <List className={classNames(classes.newsList, {
+              [classes.newsListOpen]: this.state.open,
+              [classes.newsListClose]: !this.state.open,
+            })}
+          >
+            <ListItem
+              button
+              className={classes.newsItem}
+            >
+              <Paper
+                elevation={4}
+                className={classNames(classes.addNewPaper, {
+                  [classes.addNewPaperOpen]: this.state.open,
+                  [classes.addNewPaperClose]: !this.state.open,
+                })}
+              >
+                <div
+                  className={classNames(classes.paperContainer, {
+                    [classes.paperContainerOpen]: this.state.open,
+                    [classes.paperContainerClose]: !this.state.open,
+                  })}
+                >
+                  <Avatar className={classes.addNew}>N</Avatar> 
+                </div>
+                <Typography
+                  noWrap
+                  className={classNames(classes.news, {
+                    [classes.newsOpen]: this.state.open,
+                    [classes.newsClose]: !this.state.open,
+                  })}
+                >
+                  News
+                </Typography>
+              </Paper>
+            </ListItem>
+          </List>
+          <List className={classNames(classes.list, {
+              [classes.listOpen]: this.state.open,
+              [classes.listClose]: !this.state.open,
+            })}
+          >
+            {['Politcal', 'History', 'Military', 'Art'].map((text, index) => (
+              <ListItem
+                button
+                key={text}
+                className={classes.item}
+              >
+                <ListItemIcon>
+                  {
+                    <IconButton
+                      color="inherit"
+                      className={classes.itemButton}
+                    >
+                      <Avatar className={classes.itemIcon}>{text[0]}</Avatar>
+                    </IconButton>
+                  }
+                </ListItemIcon>
+                <ListItemText
+                  primary={text}
+                  className={classNames(classes.itemText, {
+                    [classes.itemTextOpen]: this.state.open,
+                    [classes.itemTextClose]: !this.state.open,
+                  })}
+                />
               </ListItem>
             ))}
           </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+          <Divider/>
         </Drawer>
+        <main className={classes.content}>
+          <div>
+            123
+          </div>
+        </main>
       </div>
     );
   }
 }
 
-PrimarySearchAppBar.propTypes = {
+Navigation.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(PrimarySearchAppBar);
+export default withStyles(styles, { withTheme: true })(Navigation);
