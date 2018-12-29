@@ -29,7 +29,13 @@ import classNames from 'classnames';
 import red from '@material-ui/core/colors/red';
 import Paper from '@material-ui/core/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline';
-// import Pages from '../Pages/Pages';
+import SpeakerNotesIcon from '@material-ui/icons/SpeakerNotes';
+import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
+import ContactsIcon from '@material-ui/icons/Contacts';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+import SettingsIcon from '@material-ui/icons/Settings';
+import Pages from '../Pages/Pages';
 
 const drawerWidth = 256;
 
@@ -203,11 +209,10 @@ const styles = theme => ({
     }),
   },
   addNew: {
-    margin: -24,
-    width: 56,
-    height: 56,
+    margin: -15,
+    width: 40,
+    height: 40,
     color: red[500],
-    backgroundColor: '#fff',
     float: 'left',
   },
   news: {
@@ -246,12 +251,10 @@ const styles = theme => ({
     height: 32,
     marginLeft: 12,
   },
-  itemIcon: {
+  itemIcons: {
     margin: -12,
-    width: 32,
-    height: 32,
-    color: red[500],
-    backgroundColor: '#fff',
+    //width: 32,
+    //height: 32,
   },
   itemText: {
     marginLeft: -20,
@@ -265,6 +268,14 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     paddingTop: theme.spacing.unit * 8,
+    width: 0,
+  },
+  pages: {
+    maxWidth: 1024,
+    width: 1024,
+    margin: `0, auto`,
+    display: 'flex',
+    justifyContent: 'center',
   },
 });
 
@@ -452,7 +463,7 @@ class Navigation extends React.Component {
                     [classes.paperContainerClose]: !this.state.open,
                   })}
                 >
-                  <Avatar className={classes.addNew}>N</Avatar> 
+                  <SpeakerNotesIcon className={classes.addNew} />
                 </div>
                 <Typography
                   noWrap
@@ -471,10 +482,25 @@ class Navigation extends React.Component {
               [classes.listClose]: !this.state.open,
             })}
           >
-            {['Politcal', 'History', 'Military', 'Art'].map((text, index) => (
+            {[{
+              text: 'Political',
+              icon: <RecordVoiceOverIcon className={classes.itemIcons} />,
+              },
+              {
+              text: 'History',
+              icon: <ContactsIcon className={classes.itemIcons} />,
+              },
+              {
+              text: 'Military',
+              icon: <SupervisorAccountIcon className={classes.itemIcons} />,
+              },
+              {
+              text: 'Art',
+              icon: <AccountBalanceIcon className={classes.itemIcons} />,
+              },].map(data => (
               <ListItem
                 button
-                key={text}
+                key={data.text}
                 className={classes.item}
               >
                 <ListItemIcon>
@@ -483,12 +509,12 @@ class Navigation extends React.Component {
                       color="inherit"
                       className={classes.itemButton}
                     >
-                      <Avatar className={classes.itemIcon}>{text[0]}</Avatar>
+                      {data.icon}
                     </IconButton>
                   }
                 </ListItemIcon>
                 <ListItemText
-                  primary={text}
+                  primary={data.text}
                   className={classNames(classes.itemText, {
                     [classes.itemTextOpen]: this.state.open,
                     [classes.itemTextClose]: !this.state.open,
@@ -498,11 +524,43 @@ class Navigation extends React.Component {
             ))}
           </List>
           <Divider/>
+          <List className={classNames(classes.list, {
+              [classes.listOpen]: this.state.open,
+              [classes.listClose]: !this.state.open,
+            })}
+          >
+            {[{
+              text: 'Setting',
+              icon: <SettingsIcon className={classes.itemIcons} />,
+              },].map(data => (
+              <ListItem
+                button
+                key={data.text}
+                className={classes.item}
+              >
+                <ListItemIcon>
+                  {
+                    <IconButton
+                      color="inherit"
+                      className={classes.itemButton}
+                    >
+                      {data.icon}
+                    </IconButton>
+                  }
+                </ListItemIcon>
+                <ListItemText
+                  primary={data.text}
+                  className={classNames(classes.itemText, {
+                    [classes.itemTextOpen]: this.state.open,
+                    [classes.itemTextClose]: !this.state.open,
+                  })}
+                />
+              </ListItem>
+            ))}
+          </List>
         </Drawer>
         <main className={classes.content}>
-          <div>
-            123
-          </div>
+          <Pages classNames={classes.pages}></Pages>
         </main>
       </div>
     );
