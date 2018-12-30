@@ -1,6 +1,6 @@
 # pohimiar
 
-> Politica,History,Military,Art,all that we observe.
+> Political,History,Military,Art.All that we observe.
 
 ## Build Setup
 
