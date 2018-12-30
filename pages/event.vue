@@ -1,6 +1,6 @@
 <template>
   <div>
-    Explore
+    Event
   </div>
 </template>
 

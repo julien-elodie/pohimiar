@@ -1,6 +1,6 @@
 <template>
   <div>
-    Explore
+    Article
   </div>
 </template>
 

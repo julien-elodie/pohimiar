@@ -80,5 +80,5 @@ dist
 # IDE
 .idea
 
-# VS Code settings
+# vscode
 .vscode/*
