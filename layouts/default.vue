@@ -75,7 +75,8 @@
     <v-toolbar 
       :clipped-left="clipped" 
       fixed 
-      app>
+      app
+    >
       <v-toolbar-side-icon @click="drawer = !drawer"/>
       <v-toolbar-title v-text="title"/>
       <v-spacer/>
@@ -84,56 +85,55 @@
       </v-btn>
     </v-toolbar>
     <v-content>
-      <v-container>
-        <nuxt/>
-      </v-container>
-      <v-bottom-nav
-        :active.sync="bottomNav"
-        :value="true"
-        absolute
-        color="transparent"
-      >
-        <v-btn
-          color="primary"
-          flat
-          value="explore"
-          @click="this.$router.push('/')"
-        >
-          <span>Explore</span>
-          <v-icon>explore</v-icon>
-        </v-btn>
-
-        <v-btn
-          color="primary"
-          flat
-          value="figure"
-          @click="this.$router.push('/figure')"
-        >
-          <span>Figure</span>
-          <v-icon>person_pin</v-icon>
-        </v-btn>
-
-        <v-btn
-          color="primary"
-          flat
-          value="event"
-          @click="this.$router.push('/event')"
-        >
-          <span>Event</span>
-          <v-icon>event</v-icon>
-        </v-btn>
-
-        <v-btn
-          color="primary"
-          flat
-          value="article"
-          @click="this.$router.push('/article')"
-        >
-          <span>Article</span>
-          <v-icon>receipt</v-icon>
-        </v-btn>
-      </v-bottom-nav>
+      <nuxt/>
     </v-content>
+    <v-bottom-nav
+      :active.sync="bottomNav"
+      :value="!drawer"
+      fixed
+      color="white"
+      app
+    >
+      <v-btn
+        color="primary"
+        flat
+        value="explore"
+        @click="$nuxt.$router.push('/')"
+      >
+        <span>Explore</span>
+        <v-icon>explore</v-icon>
+      </v-btn>
+
+      <v-btn
+        color="primary"
+        flat
+        value="figure"
+        @click="$nuxt.$router.push('/figure')"
+      >
+        <span>Figure</span>
+        <v-icon>person_pin</v-icon>
+      </v-btn>
+
+      <v-btn
+        color="primary"
+        flat
+        value="event"
+        @click="$nuxt.$router.push('/event')"
+      >
+        <span>Event</span>
+        <v-icon>event</v-icon>
+      </v-btn>
+
+      <v-btn
+        color="primary"
+        flat
+        value="article"
+        @click="$nuxt.$router.push('/article')"
+      >
+        <span>Article</span>
+        <v-icon>receipt</v-icon>
+      </v-btn>
+    </v-bottom-nav>
   </v-app>
 </template>
 
@@ -154,11 +154,23 @@ export default {
       ],
       miniVariant: false,
       title: 'POHIMIAR',
-      bottomNav: 'explore',
+      bottomNav: '',
       avatarSize: 56,
       avatarColor: 'primary',
       nickName: '',
       userName: 'Please login your account!'
+    }
+  },
+  mounted: function() {
+    this.judge()
+  },
+  methods: {
+    judge: function() {
+      if ($nuxt.$route.path.split('/')[1]) {
+        this.bottomNav = $nuxt.$route.path.split('/')[1]
+      } else {
+        this.bottomNav = 'explore'
+      }
     }
   }
 }
