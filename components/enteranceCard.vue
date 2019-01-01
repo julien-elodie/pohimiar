@@ -52,7 +52,7 @@
           <v-card-actions :class="`${iters.color} darken-2`">
             <v-spacer/>
             <v-btn icon>
-              <v-icon>search</v-icon>
+              <v-icon>visibility</v-icon>
             </v-btn>
             <v-btn icon>
               <v-icon>favorite</v-icon>

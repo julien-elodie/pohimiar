@@ -24,6 +24,11 @@
           </v-avatar>
           <v-spacer/>
           <v-flex shrink>
+            <a 
+              v-if="!login" 
+              @click="$nuxt.$router.push('/login')">
+              Login/Sign up
+            </a>
             <div 
               class="subheading" 
               v-text="nickName"/>
@@ -73,6 +78,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar 
+      v-if="!search"
       :clipped-left="clipped" 
       fixed 
       app
@@ -80,9 +86,27 @@
       <v-toolbar-side-icon @click="drawer = !drawer"/>
       <v-toolbar-title v-text="title"/>
       <v-spacer/>
-      <v-btn icon>
+      <v-btn 
+        icon 
+        @click="search = !search">
         <v-icon>search</v-icon>
       </v-btn>
+    </v-toolbar>
+    <v-toolbar
+      v-if="search"
+      extended>
+      <v-toolbar-side-icon @click="drawer = !drawer"/>
+      <v-toolbar-title v-text="title"/>
+      <v-spacer/>
+      <v-text-field
+        slot="extension"
+        append-icon="mic"
+        flat
+        label="Search"
+        prepend-inner-icon="search"
+        solo
+        @click="handleSearch"
+      />
     </v-toolbar>
     <v-content>
       <nuxt/>
@@ -143,7 +167,9 @@ export default {
     return {
       clipped: false,
       drawer: false,
+      search: false,
       fixed: true,
+      login: false,
       accountItems: [
         { icon: 'account_circle', title: 'Account', to: '/account' },
         { icon: 'notifications', title: 'Notifications', to: '/notifications' }
@@ -171,6 +197,10 @@ export default {
       } else {
         this.bottomNav = 'explore'
       }
+    },
+    handleSearch: function() {
+      this.search = !this.search
+      $nuxt.$router.push('/search')
     }
   }
 }

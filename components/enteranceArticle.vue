@@ -21,7 +21,7 @@
     <v-card-actions>
       <v-spacer/>
       <v-btn icon>
-        <v-icon>search</v-icon>
+        <v-icon>visibility</v-icon>
       </v-btn>
       <v-btn icon>
         <v-icon>favorite</v-icon>

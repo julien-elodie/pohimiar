@@ -38,8 +38,11 @@
                 alt="avatar">
             </v-avatar>
             <div 
-              class="title font-weight-light text-xs-center" 
-              v-text="username"/>
+              class="title font-weight-light text-xs-center" >
+              <a 
+                :href="homepage" 
+                v-text="username"/>
+            </div>
             <div 
               class="subheading font-weight-thin text-xs-center ma-2" 
               v-text="quote"/>
@@ -78,7 +81,7 @@
               </v-btn>
             </div>
             <div class="body-1 font-weight-light ma-1">VPS provider: <a 
-              href="https://justhost.ru/hosting/" 
+              :href="vpsHref" 
               v-text="vps"/>
             </div>
           </v-flex>
@@ -102,15 +105,10 @@
   align-items: center;
   flex-direction: column;
 }
-.text {
-  line-height: 20.8px;
-  height: 90.4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 </style>
 
 <script>
+import constant from '../assets/constant'
 import enteranceArticle from '../components/enteranceArticle.vue'
 
 export default {
@@ -119,10 +117,6 @@ export default {
   },
   data: () => ({
     isMobile: false,
-    socialItems: [
-      { icon: 'account_circle', title: 'Account', to: '/account' },
-      { icon: 'notifications', title: 'Notifications', to: '/notifications' }
-    ],
     Articles: [
       {
         title: 'Article Title',
@@ -139,10 +133,12 @@ export default {
           'Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.'
       }
     ],
-    avatarSrc: 'https://cdn.vuetifyjs.com/images/john.jpg',
-    username: 'Philous',
-    quote: 'no man is an island',
-    vps: 'justhost.ru'
+    avatarSrc: constant.developerAvatar,
+    username: constant.developer,
+    homepage: constant.homepage,
+    quote: constant.quote,
+    vps: constant.vpsName,
+    vpsHref: constant.vpsHref
   }),
   computed: {
     articles() {
@@ -160,7 +156,7 @@ export default {
   },
   methods: {
     onResize() {
-      this.isMobile = window.innerWidth < 800
+      this.isMobile = window.innerWidth < 880
     }
   }
 }

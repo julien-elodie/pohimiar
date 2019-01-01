@@ -33,37 +33,9 @@
             fill-dot
           >
             <span v-text="event.time"/>
-            <v-hover>
-              <v-card 
-                slot-scope="{ hover }"
-                :class="`elevation-${hover ? 12 : 2}`">
-                <v-img
-                  :aspect-ratio="16/9"
-                  :src="event.src"
-                  height="256px"
-                  class="white--text"
-                >
-                  <v-card-title 
-                    class="title" 
-                    v-text="event.title"/>
-                </v-img>
-                <v-card-actions>
-                  <v-spacer/>
-                  <v-btn icon>
-                    <v-icon>search</v-icon>
-                  </v-btn>
-                  <v-btn icon>
-                    <v-icon>favorite</v-icon>
-                  </v-btn>
-                  <v-btn icon>
-                    <v-icon>bookmark</v-icon>
-                  </v-btn>
-                  <v-btn icon>
-                    <v-icon>share</v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-hover>
+            <enterance-timeline 
+              :src="event.src" 
+              :title="event.title"/>
           </v-timeline-item>
         </v-timeline>
       </v-flex>
@@ -72,7 +44,12 @@
 </template>
 
 <script>
+import enteranceTimeline from '../components/enteranceTimeline.vue'
+
 export default {
+  components: {
+    enteranceTimeline
+  },
   data: () => ({
     events: [
       {
