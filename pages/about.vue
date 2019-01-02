@@ -3,7 +3,7 @@
     <backable-toolbar 
       :title="title" 
       class="mb-2"/>
-    <v-card class="mb-2">
+    <v-card class="mt-5 mb-2">
       <v-container
         fluid
         grid-list-lg>

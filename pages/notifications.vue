@@ -3,7 +3,9 @@
     <backable-toolbar 
       :title="title" 
       class="mb-2"/>
-    <v-list three-line>
+    <v-list 
+      three-line 
+      class="mt-5">
       <template v-for="(item, index) in items">
         <v-subheader
           v-if="item.header"

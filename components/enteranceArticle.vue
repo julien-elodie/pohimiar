@@ -1,7 +1,5 @@
 <template>
-  <v-card 
-    flat 
-    max-width="600px">
+  <v-card flat>
     <v-card-title class="pb-1">
       <div 
         class="headline font-weight-light text-xs-left" 

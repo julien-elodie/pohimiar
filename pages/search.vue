@@ -1,6 +1,8 @@
 <template>
   <div>
-    <v-toolbar>
+    <v-toolbar
+      dense
+      fixed>
       <v-btn icon>
         <v-icon @click="$nuxt.$router.back(-1)">arrow_back</v-icon>
       </v-btn>

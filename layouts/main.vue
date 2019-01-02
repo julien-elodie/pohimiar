@@ -1,5 +1,16 @@
 <template>
-  <nuxt/>
+  <v-layout row>
+    <v-flex 
+      xs12 
+      md8 
+      offset-md2
+      lg6
+      offset-lg3
+      xl4
+      offset-xl4>
+      <nuxt/>
+    </v-flex>
+  </v-layout>
 </template>
 
 <style>

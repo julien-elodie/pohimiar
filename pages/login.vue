@@ -3,7 +3,7 @@
     <backable-toolbar 
       :title="title" 
       class="mb-2"/>
-    <v-card>
+    <v-card class="mt-5">
       <v-card-title>
         Login
       </v-card-title>
@@ -28,9 +28,9 @@
         />
       </v-card-text>
       <v-card-actions>
-        <v-btn flat>Login</v-btn>
+        <v-btn>Login</v-btn>
         <v-spacer/>
-        <v-btn flat>Sign up</v-btn>
+        <v-btn>Sign up</v-btn>
       </v-card-actions>
     </v-card>
     

@@ -5,7 +5,8 @@
       class="mb-2"/>
     <v-list 
       two-line 
-      subheader>
+      subheader
+      class="mt-5">
       <v-subheader>General</v-subheader>
 
       <v-list-tile 

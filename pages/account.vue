@@ -3,54 +3,10 @@
     <backable-toolbar 
       :title="title" 
       class="mb-2"/>
-    <v-card class="center">
-      <v-avatar 
-        size="180" 
-        class="ma-3">
-        <img 
-          :src="avatarSrc" 
-          alt="avatar">
-      </v-avatar>
-      <div 
-        class="title font-weight-light text-xs-center" 
-        v-text="username"/>
-      <div 
-        class="subheading font-weight-thin text-xs-center ma-2" 
-        v-text="quote"/>
-      <div class="text-xs-center">
-        <v-btn 
-          outline 
-          small
-          fab 
-          color="indigo"
-          class="ma-1">
-          <v-icon>list</v-icon>
-        </v-btn>
-        <v-btn 
-          outline 
-          small
-          fab 
-          color="indigo"
-          class="ma-1">
-          <v-icon>edit</v-icon>
-        </v-btn>
-        <v-btn 
-          outline 
-          small
-          fab 
-          color="indigo"
-          class="ma-1">
-          <v-icon>list</v-icon>
-        </v-btn>
-        <v-btn 
-          outline 
-          small
-          fab 
-          color="indigo"
-          class="ma-1">
-          <v-icon>edit</v-icon>
-        </v-btn>
-      </div>
+    <v-card class="mt-5">
+      <v-container>
+        <user-showcard :info="{avatarSrc, username, homepage, quote}"/>
+      </v-container>
       <v-divider/>
       <v-tabs fixed-tabs>
         <v-tab
@@ -72,22 +28,15 @@
   </div>
 </template>
 
-<style>
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-</style>
-
 <script>
 import backableToolbar from '../components/backableToolbar.vue'
+import userShowcard from '../components/userShowcard.vue'
 
 export default {
   layout: 'main',
   components: {
-    backableToolbar
+    backableToolbar,
+    userShowcard
   },
   data: () => ({
     title: 'Account',
@@ -97,6 +46,7 @@ export default {
     ],
     avatarSrc: 'https://cdn.vuetifyjs.com/images/john.jpg',
     username: 'username',
+    homepage: '/',
     quote: 'quote.',
     text:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
